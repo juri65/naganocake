@@ -1,55 +1,35 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'order_details/show'
+    root to: "homes#top"
+    resources :order_details, only: [:update]
+    resources :orders, only: [:index,:show,:update]
+    resources :customers, only: [:index,:show,:edit,:update]
+    resources :genres, only: [:index,:create,:edit,:update,:destroy]
+    resources :items, only: [:index,:new,:create,:show,:edit,:update,:destroy]
   end
-  namespace :admin do
-    get 'orders/show'
+  
+  scope module: :public do
+    root to: "homes#top"
+    get 'about' => 'homes#about'
+  
+    resources :shopping_addresses, only: [:index,:edit,:create,:update,:destroy]
+    resources :orders, only: [:new,:create,:index,:show]
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/done' => 'orders#done'
+    
+    resources :cart_items, only: [:index,:update,:destroy,:create]
+    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
+    
+    get 'customers/my_page' => 'customers#show'
+    get 'customers/information/edit' => 'customers#edit'
+    patch 'customers/information' => 'customers#update'
+    get 'customers/unsubscribe' => 'customers#unsubscribe'
+    patch 'customers/withdraw' => 'customers#withdraw'
+  
+    resources :items, only: [:index,:show]
+    resources :genres, only: [:show]
   end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/show'
-    get 'items/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'shopping_addresses/index'
-    get 'shopping_addresses/edit'
-  end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/done'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/index'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/unsubscribe'
-  end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
+  
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'

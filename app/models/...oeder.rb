@@ -1,2 +1,3 @@
 class Oeder < ApplicationRecord
+    
 end
