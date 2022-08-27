@@ -1,3 +1,0 @@
-class Oeder < ApplicationRecord
-    
-end
