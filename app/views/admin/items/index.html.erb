@@ -24,7 +24,7 @@
                             <td><%= item.price %></td>
                             <td><%= item.genre.name %></td>
                             <td>
-                                <% if item.is_ordered %>
+                                <% if item.status == true %>
                                   <div class='text-success'>販売中</div>
                                 <% else %>
                                   <div class="text-secondary">販売停止中</div>
@@ -41,4 +41,6 @@
 <div class="pagination justify-content-center ">
 <%= paginate @items%>
 </div>
-<%= link_to "新規登録" ,new_admin_item_path %>
+<div class="container">
+    <%= link_to "新規登録" ,new_admin_item_path %>
+</div>

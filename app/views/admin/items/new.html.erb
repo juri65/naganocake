@@ -40,10 +40,10 @@
                     <%= f.label :販売ステータス,class: "col-sm-3 col-form-label " %>
                     <div class="col-sm-9 pl-4">
                         <div class="form-check form-check-inline">
-                            <%= f.radio_button :is_ordered, true, checked: true %>販売中
+                            <%= f.radio_button :status, true, checked: true %>販売中
                         </div>
                         <div class="form-check form-check-inline">
-                            <%= f.radio_button :is_ordered, false %>販売停止中
+                            <%= f.radio_button :status, false %>販売停止中
                         </div>
                     </div>
                 </div>
