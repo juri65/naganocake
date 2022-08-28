@@ -30,6 +30,7 @@
                                   <div class="text-secondary">販売停止中</div>
                                 <% end %>
                             </td>
+                            <td><%= link_to '削除', [:admin,item], method: :delete, class: "btn btn-sm btn-danger"%></td>
                         </tr>
                         <% end %>
                     </tbody>

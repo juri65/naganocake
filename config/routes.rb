@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   namespace :admin do
     root to: "homes#top"
     resources :order_details, only: [:update]
@@ -11,21 +12,18 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get 'about' => 'homes#about'
-  
+    resources :genres, only: [:show]
     resources :shopping_addresses, only: [:index,:edit,:create,:update,:destroy]
     resources :orders, only: [:new,:create,:index,:show]
     post 'orders/confirm' => 'orders#confirm'
     get 'orders/done' => 'orders#done'
-    
     resources :cart_items, only: [:index,:update,:destroy,:create]
     delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
-    
     get 'customers/my_page' => 'customers#show'
     get 'customers/information/edit' => 'customers#edit'
     patch 'customers/information' => 'customers#update'
     get 'customers/unsubscribe' => 'customers#unsubscribe'
     patch 'customers/withdraw' => 'customers#withdraw'
-  
     resources :items, only: [:index,:show]
     resources :genres, only: [:show]
   end
