@@ -1,16 +1,117 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Naganocake</title>
+    <title>NaganoCake</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <header class="shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a class="navbar-brand p-3" href="/"><%#= image_tag 'no1.png', size: "50×50" %></a>
+      </div<div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+       
+       <% if admin_signed_in? %>
+          <li class="m-1">
+            <%= link_to new_admin_item_path,class: "btn btn-outline-secondary" do %>
+              商品新規登録
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%= link_to admin_items_path,class: "btn btn-outline-secondary" do %>
+              商品一覧
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%=  link_to admin_customers_path,class: "btn btn-outline-secondary" do %>
+              会員一覧
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%=  link_to admin_orders_path ,class: "btn btn-outline-secondary" do %>
+              注文履歴一覧
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%=  link_to admin_genres_path ,class: "btn btn-outline-secondary" do %>
+              ジャンル一覧
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%= link_to destroy_admin_session_path, method: :delete,class: "btn btn-outline-secondary" do %>
+              ログアウト
+            <% end %>
+          </li>
+        <% elsif customer_signed_in? %>
+          <li class="m-1">
+            <%= link_to customers_my_page_path,class: "btn btn-outline-secondary" do %>
+              マイページ
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%=  link_to items_path,class: "btn btn-outline-secondary" do %>
+              商品一覧
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%=  link_to cart_items_path ,class: "btn btn-outline-secondary" do %>
+              カート
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%= link_to destroy_customer_session_path, method: :delete,class: "btn btn-outline-secondary" do %>
+              ログアウト
+            <% end %>
+          </li>
+        <% else %>
+          <li class="m-1">
+            <%= link_to about_path,class: "btn btn-outline-secondary" do %>
+              About
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%= link_to items_path,class: "btn btn-outline-secondary" do %>
+              商品一覧
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%= link_to new_customer_registration_path,class: "btn btn-outline-secondary" do %>
+              新規登録
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%= link_to new_customer_session_path ,class: "btn btn-outline-secondary" do %>
+              ログイン
+            <% end %>
+          </li>
+          <li class="m-1">
+            <%= link_to new_admin_session_path ,class: "btn btn-outline-secondary" do %>
+              管理者用
+            <% end %>
+          </li>
+        <% end %>
+       
+      
+      </ul>
+      </div>
+    </nav>
+  </header>
   <body>
     <%= yield %>
-  </body>
+ </body>
+  <footer>
+    <div class='container mt-5'>
+      <div class='row'>
+        <din class='mx-auto'>
+          <p>CopyRight .inc</p>
+        </din>
+      </div>
+    </div>
+  </footer>
 </html>

@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 px-4 py-4">
+            <%= render 'public/genres/search', genres: @genres %>
+        </div>
+        <div class="col-md-9 offset-1 py-4">
+            <div class = "row">
+                <h3>商品一覧</h3><p>(全<%= @items.count %>件)</p>
+            </div>
+        
+          <div class="col-md-9">
+              <div class="row">
+                  <% @items.each do |item| %>
+                  <div class="col-3 ">
+                      <%= link_to item_path(item.id) do %>
+                      <%= image_tag item.image, size: "150x150" %>
+                      <% end %><br>
+                      <%= item.name %><br>
+                      <%= item.price %>
+                  </div>
+                  <% end %>
+                  <%= paginate @items %>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
